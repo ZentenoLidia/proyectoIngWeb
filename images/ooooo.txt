@@ -1,0 +1,53 @@
+
+
+
+                              <div>
+                                   <h3><a href="#">Citas</a></h3>
+                                   <table class="hola">
+                                    <tr class="hola">
+                                    <th class="hola">Nombre del paciente</th>
+                                    <th class="hola">Fecha</th>
+                                    </tr>
+                                   <?php
+                                    // Include config file
+                                    require_once "config.php";
+                                    $sent="SELECT nombreCliente, fecha FROM citas WHERE estatus='pendiente' AND nombreProv='".$_SESSION['username']."'";
+                                    $res = $link->query($sent);
+                                     if ($res->num_rows > 0) {
+                                        // output data of each row
+                                            while($row = $res->fetch_assoc()) {
+                                              echo "<tr class='hola'><td class='hola'>" . $row["nombreCliente"]. "</td><td class='hola'>" . $row["fecha"] . "</td></tr>";
+
+                                            }
+                                            echo "</table>";
+                                    } else { echo "<td>No hay citas pendientes</td>";}
+                                        $link->close();
+                                 ?>
+                              </div>
+              
+".$_SESSION['username']."'
+
+                                  
+                                   <h4>Comentarios de pacientes</h4>
+                                    <table class="hola">
+                                    <tr class="hola">
+                                    <th class="hola">Nombre del paciente</th>
+                                    <th class="hola">Comentario</th>
+                                    </tr>
+                                   <?php
+                                    // Include config file
+                                    require_once "config.php";
+                                    $sql="SELECT userName, comentario FROM comentarios WHERE nombreProv='".$_SESSION['username']."'";
+                                    $result = $link->query($sql);
+                                     if ($result->num_rows > 0) { 
+                                        // output data of each row
+                                            while($row = $result->fetch_assoc()) {
+                                              echo "<tr class='hola'><td class='hola'>" . $row["userName"]. "</td><td class='hola'>" . $row["comentario"] . "</td></tr>";
+
+                                            }
+                                            echo "</table>";
+                                    } else { echo "<td>No hay comentarios</td>";}
+                                        $link->close();
+                                 ?>
+
+                                   <!--a href="#" class="btn section-btn">Ver citas</a-->                     
